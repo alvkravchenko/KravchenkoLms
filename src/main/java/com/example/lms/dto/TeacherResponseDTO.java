@@ -6,7 +6,8 @@ import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-public class TeacherResponseDTO {
+public class
+TeacherResponseDTO {
 
     private UUID id;
     private String firstName;
