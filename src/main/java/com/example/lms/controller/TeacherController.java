@@ -25,7 +25,7 @@ public class TeacherController {
     @GetMapping
     public Page<TeacherResponseDTO> getAll(Pageable pageable) {
         return null;
-    }
+    } // пагинация
 
     @GetMapping("/{teacherId}")
     public TeacherResponseDTO getTeacherById(@PathVariable UUID teacherId) {
@@ -35,7 +35,7 @@ public class TeacherController {
     @PostMapping
     public ResponseEntity<TeacherResponseDTO> createTeacher(@Valid @RequestBody TeacherCreateDTO createDTO) {
         return null;
-    }
+    } // ResponseEntity для 201 + location
 
     @PutMapping("/{teacherId}")
     public TeacherResponseDTO updateTeacher(@PathVariable UUID teacherId, @Valid @RequestBody TeacherUpdateDTO updateDTO) {
@@ -46,4 +46,4 @@ public class TeacherController {
     public ResponseEntity<Void> deleteTeacher(@PathVariable UUID teacherId) {
         return null;
     }
-}
+} // ResponseEntity для 204 no content

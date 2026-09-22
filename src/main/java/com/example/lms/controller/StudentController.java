@@ -24,7 +24,7 @@ public class StudentController {
     @GetMapping
     public Page<StudentResponseDTO> getAll(Pageable pageable) {
         return null;
-    }
+    }// пагинация
 
     @GetMapping("/{studentId}")
     public StudentResponseDTO getStudentById(@PathVariable UUID studentId) {
@@ -34,7 +34,7 @@ public class StudentController {
     @PostMapping
     public ResponseEntity<StudentResponseDTO> createStudent(@Valid @RequestBody StudentCreateDTO createDTO) {
         return null;
-    }
+    } // ResponseEntity для 201 + location
 
     @PutMapping("/{studentId}")
     public StudentResponseDTO updateStudent(@PathVariable UUID studentId, @Valid @RequestBody StudentUpdateDTO updateDTO) {
@@ -45,14 +45,15 @@ public class StudentController {
     public ResponseEntity<Void> deleteStudent(@PathVariable UUID studentId) {
         return null;
     }
+    // ResponseEntity для 204 no content
 
-    @PostMapping("/{studentId}/groups/{groupId}")
-    public StudentResponseDTO addStudentToGroup(@PathVariable UUID studentId, @PathVariable UUID groupId) {
+    @PostMapping("/{studentId}/groups/{groupId}") // эндпоинт для добавления связи
+    public StudentResponseDTO addGroupToStudent(@PathVariable UUID studentId, @PathVariable UUID groupId) {
         return null;
     }
 
-    @DeleteMapping("/{studentId}/groups/{groupId}")
-    public StudentResponseDTO removeStudentFromGroup(@PathVariable UUID studentId, @PathVariable UUID groupId) {
+    @DeleteMapping("/{studentId}/groups/{groupId}") // эндпоинт для удаления связи
+    public StudentResponseDTO removeGroupFromStudent(@PathVariable UUID studentId, @PathVariable UUID groupId) {
         return null;
     }
 }

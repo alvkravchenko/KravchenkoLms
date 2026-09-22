@@ -25,7 +25,7 @@ public class CourseController {
     @GetMapping
     public Page<CourseResponseDTO> getAll(Pageable pageable) {
         return null;
-    }
+    } // пагинация
 
     @GetMapping("/{courseId}")
     public CourseResponseDTO getCourseById(@PathVariable UUID courseId) {
@@ -35,7 +35,7 @@ public class CourseController {
     @PostMapping
     public ResponseEntity<CourseResponseDTO> createCourse(@Valid @RequestBody CourseCreateDTO createDTO) {
         return null;
-    }
+    } // ResponseEntity для 201 + location
 
     @PutMapping("/{courseId}")
     public CourseResponseDTO updateCourse(@PathVariable UUID courseId, @Valid @RequestBody CourseUpdateDTO updateDTO) {
@@ -46,4 +46,4 @@ public class CourseController {
     public ResponseEntity<Void> deleteCourse(@PathVariable UUID courseId) {
         return null;
     }
-}
+} // ResponseEntity для 204 no content

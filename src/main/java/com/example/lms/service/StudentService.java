@@ -31,11 +31,11 @@ public class StudentService {
 
     }
 
-    public StudentResponseDTO addStudentToGroup(UUID studentId, UUID groupId) {
+    public StudentResponseDTO addGroupToStudent(UUID studentId, UUID groupId) {
         return null;
     }
 
-    public StudentResponseDTO removeStudentFromGroup(UUID studentId, UUID groupId) {
+    public StudentResponseDTO removeGroupFromStudent(UUID studentId, UUID groupId) {
         return null;
     }
 }

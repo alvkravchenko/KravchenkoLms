@@ -12,5 +12,5 @@ public class StudentResponseDTO {
     private UUID id;
     private String firstName;
     private String lastName;
-    private List<GroupShortDTO> groups;
+    private List<GroupShortDTO> groups; // в ответе по студенту есть инфа по его группам
 }

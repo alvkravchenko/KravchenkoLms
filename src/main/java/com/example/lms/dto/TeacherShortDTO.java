@@ -6,10 +6,9 @@ import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-public class TeacherShortDTO { // на будущее, для включение в курс и расписание,
-    // чтобы не отдавать туда все поля препода
+public class TeacherShortDTO { // для встраивания в CourseResponseDTO и ScheduleResponseDTO
 
-    private UUID id; // нет валидации, это исходящий DTO (Response)
+    private UUID id;
     private String firstName;
     private String lastName;
 }
