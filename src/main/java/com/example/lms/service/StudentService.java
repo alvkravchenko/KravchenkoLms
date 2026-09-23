@@ -1,9 +1,9 @@
 package com.example.lms.service;
 
+import com.example.lms.dto.PageResponseDTO;
 import com.example.lms.dto.StudentCreateDTO;
 import com.example.lms.dto.StudentResponseDTO;
 import com.example.lms.dto.StudentUpdateDTO;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.UUID;
@@ -11,7 +11,7 @@ import java.util.UUID;
 @Service
 public class StudentService {
 
-    public Page<StudentResponseDTO> findAll(Pageable pageable) {
+    public PageResponseDTO<StudentResponseDTO> findAll(Pageable pageable) {
         return null;
     }
 

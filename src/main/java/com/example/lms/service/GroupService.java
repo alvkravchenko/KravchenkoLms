@@ -3,7 +3,7 @@ package com.example.lms.service;
 import com.example.lms.dto.GroupCreateDTO;
 import com.example.lms.dto.GroupResponseDTO;
 import com.example.lms.dto.GroupUpdateDTO;
-import org.springframework.data.domain.Page;
+import com.example.lms.dto.PageResponseDTO;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.UUID;
@@ -11,7 +11,7 @@ import java.util.UUID;
 @Service
 public class GroupService {
 
-    public Page<GroupResponseDTO> findAll(Pageable pageable) {
+    public PageResponseDTO<GroupResponseDTO> findAll(Pageable pageable) {
         return null;
     }
 

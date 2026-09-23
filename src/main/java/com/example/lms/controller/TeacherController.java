@@ -1,15 +1,14 @@
 package com.example.lms.controller;
 
+import com.example.lms.dto.PageResponseDTO;
 import com.example.lms.dto.TeacherCreateDTO;
 import com.example.lms.dto.TeacherResponseDTO;
 import com.example.lms.dto.TeacherUpdateDTO;
 import com.example.lms.service.TeacherService;
 import jakarta.validation.Valid;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.UUID;
 
 @RestController
@@ -23,7 +22,7 @@ public class TeacherController {
     }
 
     @GetMapping
-    public Page<TeacherResponseDTO> getAll(Pageable pageable) {
+    public PageResponseDTO<TeacherResponseDTO> getAll(Pageable pageable) {
         return null;
     } // пагинация
 

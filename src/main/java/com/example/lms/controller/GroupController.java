@@ -3,9 +3,9 @@ package com.example.lms.controller;
 import com.example.lms.dto.GroupCreateDTO;
 import com.example.lms.dto.GroupResponseDTO;
 import com.example.lms.dto.GroupUpdateDTO;
+import com.example.lms.dto.PageResponseDTO;
 import com.example.lms.service.GroupService;
 import jakarta.validation.Valid;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class GroupController {
     }
 
     @GetMapping
-    public Page<GroupResponseDTO> getAll(Pageable pageable) {
+    public PageResponseDTO<GroupResponseDTO> getAll(Pageable pageable) {
         return null;
     }
 
@@ -47,7 +47,7 @@ public class GroupController {
     } // ResponseEntity для 204 no content
 
     @PostMapping("/{groupId}/students/{studentId}") // эндпоинт для добавления связи
-    public GroupResponseDTO addStudentToGroup(@PathVariable UUID groupId,@PathVariable UUID studentId) {
+    public GroupResponseDTO addStudentToGroup(@PathVariable UUID groupId, @PathVariable UUID studentId) {
         return null;
     }
 
