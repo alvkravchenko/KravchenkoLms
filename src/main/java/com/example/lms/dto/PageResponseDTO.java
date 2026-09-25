@@ -12,7 +12,7 @@ import java.util.List;
 public class PageResponseDTO<T> { // один класс для для страницы с пагинацией с любым DTO через дженерик
     // T — тип DTO внутри (параметр типа класса)
 
-    private List<T> content; // // список DTO типа T
+    private List<T> content; // список DTO типа T
     private int page; // номер страницы
     private int size; // кол-во элементов на странице
     private long totalElements; // всего элементов в БД

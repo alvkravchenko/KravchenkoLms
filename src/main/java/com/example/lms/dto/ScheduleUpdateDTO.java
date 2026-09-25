@@ -8,7 +8,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 public class ScheduleUpdateDTO {
-
+    // тут нет валидации NotNull, потому что будет использщоваться PATH, а не PUT, ЗАПОМНИ УЖЕ!
     private UUID groupId;
     private UUID teacherId;
     private UUID courseId;

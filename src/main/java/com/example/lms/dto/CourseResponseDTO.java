@@ -2,6 +2,7 @@ package com.example.lms.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.util.UUID;
 
 @Data
@@ -12,6 +13,4 @@ public class CourseResponseDTO {
     private String name;
     private String description;
     private TeacherShortDTO teacher; // в ответе по курсу есть инфа про препода
-
-
 }
