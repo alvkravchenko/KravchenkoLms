@@ -11,4 +11,4 @@ public class TeacherShortDTO { // для встраивания в CourseRespons
     private UUID id;
     private String firstName;
     private String lastName;
-}
+}  
