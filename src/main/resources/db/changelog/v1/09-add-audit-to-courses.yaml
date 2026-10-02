@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 9
+      author: alexandr_kravchenko
+      changes:
+        - addColumn:
+            tableName: courses
+            columns:
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
