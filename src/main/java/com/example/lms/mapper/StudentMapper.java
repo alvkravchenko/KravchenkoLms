@@ -15,9 +15,16 @@ public interface StudentMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "groups", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
+    @Mapping(target = "deletedAt", ignore = true)
     Student toEntity(StudentCreateDTO createDTO);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "groups", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "deletedAt", ignore = true)
     void updateEntity(@MappingTarget Student student, StudentUpdateDTO updateDTO);
 }

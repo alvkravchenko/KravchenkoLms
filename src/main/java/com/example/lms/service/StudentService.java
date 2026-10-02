@@ -4,6 +4,7 @@ import com.example.lms.dto.PageResponseDTO;
 import com.example.lms.dto.student.StudentCreateDTO;
 import com.example.lms.dto.student.StudentResponseDTO;
 import com.example.lms.dto.student.StudentUpdateDTO;
+import com.example.lms.entity.Student;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.UUID;
@@ -28,7 +29,6 @@ public class StudentService {
     }
 
     public void delete(UUID studentId) {
-
     }
 
     public StudentResponseDTO addGroupToStudent(UUID studentId, UUID groupId) {

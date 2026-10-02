@@ -16,9 +16,16 @@ public interface TeacherMapper {
 
     TeacherShortDTO toShort(Teacher teacher);
 
-    @Mapping(target = "id", ignore = true) // сейчас id нет в DTO, но полезно на будущее
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
+    @Mapping(target = "deletedAt", ignore = true)
     Teacher toEntity(TeacherCreateDTO createDTO);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "deletedAt", ignore = true)
     void updateEntity(@MappingTarget Teacher teacher, TeacherUpdateDTO updateDTO);
 }
