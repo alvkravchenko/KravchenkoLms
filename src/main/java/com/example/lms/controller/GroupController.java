@@ -1,8 +1,8 @@
 package com.example.lms.controller;
 
-import com.example.lms.dto.GroupCreateDTO;
-import com.example.lms.dto.GroupResponseDTO;
-import com.example.lms.dto.GroupUpdateDTO;
+import com.example.lms.dto.group.GroupCreateDTO;
+import com.example.lms.dto.group.GroupResponseDTO;
+import com.example.lms.dto.group.GroupUpdateDTO;
 import com.example.lms.dto.PageResponseDTO;
 import com.example.lms.service.GroupService;
 import jakarta.validation.Valid;

@@ -1,8 +1,8 @@
 package com.example.lms.mapper;
 
-import com.example.lms.dto.StudentCreateDTO;
-import com.example.lms.dto.StudentResponseDTO;
-import com.example.lms.dto.StudentUpdateDTO;
+import com.example.lms.dto.student.StudentCreateDTO;
+import com.example.lms.dto.student.StudentResponseDTO;
+import com.example.lms.dto.student.StudentUpdateDTO;
 import com.example.lms.entity.Student;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

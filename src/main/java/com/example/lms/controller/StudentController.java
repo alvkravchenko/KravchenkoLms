@@ -1,9 +1,9 @@
 package com.example.lms.controller;
 
 import com.example.lms.dto.PageResponseDTO;
-import com.example.lms.dto.StudentCreateDTO;
-import com.example.lms.dto.StudentResponseDTO;
-import com.example.lms.dto.StudentUpdateDTO;
+import com.example.lms.dto.student.StudentCreateDTO;
+import com.example.lms.dto.student.StudentResponseDTO;
+import com.example.lms.dto.student.StudentUpdateDTO;
 import com.example.lms.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;

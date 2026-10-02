@@ -1,8 +1,8 @@
 package com.example.lms.controller;
 
-import com.example.lms.dto.CourseCreateDTO;
-import com.example.lms.dto.CourseResponseDTO;
-import com.example.lms.dto.CourseUpdateDTO;
+import com.example.lms.dto.course.CourseCreateDTO;
+import com.example.lms.dto.course.CourseResponseDTO;
+import com.example.lms.dto.course.CourseUpdateDTO;
 import com.example.lms.dto.PageResponseDTO;
 import com.example.lms.service.CourseService;
 import jakarta.validation.Valid;

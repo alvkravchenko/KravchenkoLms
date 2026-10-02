@@ -1,9 +1,9 @@
 package com.example.lms.service;
 
 import com.example.lms.dto.PageResponseDTO;
-import com.example.lms.dto.TeacherCreateDTO;
-import com.example.lms.dto.TeacherResponseDTO;
-import com.example.lms.dto.TeacherUpdateDTO;
+import com.example.lms.dto.teacher.TeacherCreateDTO;
+import com.example.lms.dto.teacher.TeacherResponseDTO;
+import com.example.lms.dto.teacher.TeacherUpdateDTO;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.UUID;

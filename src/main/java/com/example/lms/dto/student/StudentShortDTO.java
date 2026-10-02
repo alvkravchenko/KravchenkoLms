@@ -1,13 +1,12 @@
-package com.example.lms.dto;
+package com.example.lms.dto.student;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-public class TeacherResponseDTO {
+public class StudentShortDTO { // для встраивания в GroupResponseDTO
 
     private UUID id;
     private String firstName;

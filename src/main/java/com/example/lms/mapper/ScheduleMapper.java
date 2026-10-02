@@ -1,8 +1,8 @@
 package com.example.lms.mapper;
 
-import com.example.lms.dto.ScheduleCreateDTO;
-import com.example.lms.dto.ScheduleResponseDTO;
-import com.example.lms.dto.ScheduleUpdateDTO;
+import com.example.lms.dto.schedule.ScheduleCreateDTO;
+import com.example.lms.dto.schedule.ScheduleResponseDTO;
+import com.example.lms.dto.schedule.ScheduleUpdateDTO;
 import com.example.lms.entity.Schedule;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

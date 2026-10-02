@@ -1,4 +1,4 @@
-package com.example.lms.dto;
+package com.example.lms.dto.course;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

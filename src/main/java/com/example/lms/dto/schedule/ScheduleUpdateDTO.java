@@ -1,4 +1,4 @@
-package com.example.lms.dto;
+package com.example.lms.dto.schedule;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

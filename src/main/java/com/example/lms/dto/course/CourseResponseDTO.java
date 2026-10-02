@@ -1,5 +1,6 @@
-package com.example.lms.dto;
+package com.example.lms.dto.course;
 
+import com.example.lms.dto.teacher.TeacherShortDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

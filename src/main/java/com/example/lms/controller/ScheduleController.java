@@ -1,8 +1,8 @@
 package com.example.lms.controller;
 
-import com.example.lms.dto.ScheduleCreateDTO;
-import com.example.lms.dto.ScheduleResponseDTO;
-import com.example.lms.dto.ScheduleUpdateDTO;
+import com.example.lms.dto.schedule.ScheduleCreateDTO;
+import com.example.lms.dto.schedule.ScheduleResponseDTO;
+import com.example.lms.dto.schedule.ScheduleUpdateDTO;
 import com.example.lms.service.ScheduleService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

@@ -1,8 +1,8 @@
 package com.example.lms.mapper;
 
-import com.example.lms.dto.GroupCreateDTO;
-import com.example.lms.dto.GroupResponseDTO;
-import com.example.lms.dto.GroupUpdateDTO;
+import com.example.lms.dto.group.GroupCreateDTO;
+import com.example.lms.dto.group.GroupResponseDTO;
+import com.example.lms.dto.group.GroupUpdateDTO;
 import com.example.lms.entity.Group;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

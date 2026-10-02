@@ -1,4 +1,4 @@
-package com.example.lms.dto;
+package com.example.lms.dto.schedule;
 
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;

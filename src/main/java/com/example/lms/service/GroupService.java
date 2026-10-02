@@ -1,8 +1,8 @@
 package com.example.lms.service;
 
-import com.example.lms.dto.GroupCreateDTO;
-import com.example.lms.dto.GroupResponseDTO;
-import com.example.lms.dto.GroupUpdateDTO;
+import com.example.lms.dto.group.GroupCreateDTO;
+import com.example.lms.dto.group.GroupResponseDTO;
+import com.example.lms.dto.group.GroupUpdateDTO;
 import com.example.lms.dto.PageResponseDTO;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

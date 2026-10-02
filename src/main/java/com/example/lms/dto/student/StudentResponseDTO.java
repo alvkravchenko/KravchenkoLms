@@ -1,5 +1,6 @@
-package com.example.lms.dto;
+package com.example.lms.dto.student;
 
+import com.example.lms.dto.group.GroupShortDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.List;
