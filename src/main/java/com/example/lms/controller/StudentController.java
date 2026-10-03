@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.UUID;
 
 @RestController
@@ -46,14 +47,4 @@ public class StudentController {
         return null;
     }
     // ResponseEntity для 204 no content
-
-    @PostMapping("/{studentId}/groups/{groupId}") // эндпоинт для добавления связи
-    public StudentResponseDTO addGroupToStudent(@PathVariable UUID studentId, @PathVariable UUID groupId) {
-        return null;
-    }
-
-    @DeleteMapping("/{studentId}/groups/{groupId}") // эндпоинт для удаления связи
-    public StudentResponseDTO removeGroupFromStudent(@PathVariable UUID studentId, @PathVariable UUID groupId) {
-        return null;
-    }
 }
