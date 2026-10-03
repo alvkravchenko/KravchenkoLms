@@ -22,5 +22,5 @@ public interface CourseMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "teacher", ignore = true)
-    void updateEntity(@MappingTarget Course course, CourseUpdateDTO updateDTO);
+    void applyFrom(@MappingTarget Course course, CourseUpdateDTO updateDTO);
 }

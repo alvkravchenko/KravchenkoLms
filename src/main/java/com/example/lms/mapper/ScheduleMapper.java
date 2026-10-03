@@ -23,5 +23,5 @@ public interface ScheduleMapper {
     @Mapping(target = "group", ignore = true)
     @Mapping(target = "teacher", ignore = true)
     @Mapping(target = "course", ignore = true)
-    void updateEntity(@MappingTarget Schedule schedule, ScheduleUpdateDTO updateDTO);
+    void applyFrom(@MappingTarget Schedule schedule, ScheduleUpdateDTO updateDTO);
 }

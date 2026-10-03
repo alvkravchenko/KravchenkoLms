@@ -19,5 +19,5 @@ public interface GroupMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "students", ignore = true)
-    void updateEntity(@MappingTarget Group group, GroupUpdateDTO updateDTO);
+    void applyFrom(@MappingTarget Group group, GroupUpdateDTO updateDTO);
 }

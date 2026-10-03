@@ -27,5 +27,5 @@ public interface TeacherMapper {
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "deletedAt", ignore = true)
-    void updateEntity(@MappingTarget Teacher teacher, TeacherUpdateDTO updateDTO);
+    void applyFrom(@MappingTarget Teacher teacher, TeacherUpdateDTO updateDTO);
 }
