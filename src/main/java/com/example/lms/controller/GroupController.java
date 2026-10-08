@@ -1,9 +1,7 @@
 package com.example.lms.controller;
 
-import com.example.lms.dto.group.GroupCreateDTO;
-import com.example.lms.dto.group.GroupResponseDTO;
-import com.example.lms.dto.group.GroupUpdateDTO;
 import com.example.lms.dto.PageResponseDTO;
+import com.example.lms.dto.group.*;
 import com.example.lms.service.GroupService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
@@ -46,13 +44,13 @@ public class GroupController {
         return null;
     } // ResponseEntity для 204 no content
 
-    @PostMapping("/{groupId}/students/{studentId}") // эндпоинт для добавления связи
-    public GroupResponseDTO addStudentToGroup(@PathVariable UUID groupId, @PathVariable UUID studentId) {
+    @PostMapping("/{groupId}/students") // эндпоинт для добавления связи
+    public GroupResponseDTO addStudentsToGroup(@PathVariable UUID groupId, @Valid @RequestBody StudentsToGroupDTO dto) {
         return null;
     }
 
-    @DeleteMapping("/{groupId}/students/{studentId}") // эндпоинт для удаления связи
-    public GroupResponseDTO removeStudentFromGroup(@PathVariable UUID groupId, @PathVariable UUID studentId) {
+    @DeleteMapping("/{groupId}/students") // эндпоинт для удаления связи
+    public GroupResponseDTO removeStudentsFromGroup(@PathVariable UUID groupId, @Valid @RequestBody StudentsToGroupDTO dto) {
         return null;
     }
 }
