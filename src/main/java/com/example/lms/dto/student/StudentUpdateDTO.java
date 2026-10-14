@@ -17,6 +17,4 @@ public class StudentUpdateDTO {
     @NotBlank(message = "Фамилия студента не может быть пустым")
     @Size(max = 50, message = "Фамилия не может быть длиннее 50 символов")
     private String lastName;
-
-    private Boolean deleted; // может быть null, поэтому Boolean
 }

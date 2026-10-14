@@ -19,7 +19,4 @@ public class CourseUpdateDTO {
     @NotBlank(message = "Описание курса не может быть пустым")
     @Size(max = 1000, message = "Описание курса не может быть длиннее 1000 символов")
     private String description;
-
-    @NotNull(message = "Курс не может быть обновлен без преподавателя")
-    private UUID teacherId;
 }

@@ -14,6 +14,4 @@ public class GroupCreateDTO {
     @NotBlank(message = "Название группы не может быть пустым")
     @Size(max = 50, message = "Название группы не может быть длиннее 50 символов")
     private String name;
-
-    private List<UUID> studentIds;
 }
