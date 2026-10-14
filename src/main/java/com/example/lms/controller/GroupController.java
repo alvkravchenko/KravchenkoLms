@@ -45,12 +45,12 @@ public class GroupController {
     } // ResponseEntity для 204 no content
 
     @PostMapping("/{groupId}/students") // эндпоинт для добавления связи
-    public GroupResponseDTO addStudentsToGroup(@PathVariable UUID groupId, @Valid @RequestBody StudentsToGroupDTO dto) {
+    public ResponseEntity<GroupResponseDTO> addStudentsToGroup(@PathVariable UUID groupId, @Valid @RequestBody StudentsToGroupDTO dto) {
         return null;
     }
 
     @DeleteMapping("/{groupId}/students") // эндпоинт для удаления связи
-    public GroupResponseDTO removeStudentsFromGroup(@PathVariable UUID groupId, @Valid @RequestBody StudentsToGroupDTO dto) {
+    public ResponseEntity<Void> removeStudentsFromGroup(@PathVariable UUID groupId, @Valid @RequestBody StudentsToGroupDTO dto) {
         return null;
     }
 }

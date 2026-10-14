@@ -1,12 +1,15 @@
 package com.example.lms.controller;
 
+import com.example.lms.dto.PageResponseDTO;
 import com.example.lms.dto.schedule.ScheduleCreateDTO;
 import com.example.lms.dto.schedule.ScheduleResponseDTO;
 import com.example.lms.dto.schedule.ScheduleUpdateDTO;
 import com.example.lms.service.ScheduleService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -21,7 +24,7 @@ public class ScheduleController {
     }
 
     @GetMapping
-    public List<ScheduleResponseDTO> getAll() {
+    public PageResponseDTO<ScheduleResponseDTO> getAll(Pageable pageable) {
         return null;
     }
 
@@ -35,23 +38,13 @@ public class ScheduleController {
         return null;
     }
 
-    @PatchMapping("/{scheduleId}")
+    @PutMapping("/{scheduleId}")
     public ScheduleResponseDTO updateSchedule(@PathVariable UUID scheduleId, @Valid @RequestBody ScheduleUpdateDTO updateDTO) {
         return null;
     }
 
     @DeleteMapping("/{scheduleId}")
     public ResponseEntity<Void> deleteSchedule(@PathVariable UUID scheduleId) {
-        return null;
-    }
-
-    @GetMapping("/by-group/{groupId}")
-    public List<ScheduleResponseDTO> getGroupSchedule(@PathVariable UUID groupId) {
-        return null;
-    }
-
-    @GetMapping("/by-teacher/{teacherId}")
-    public List<ScheduleResponseDTO> getTeacherSchedule(@PathVariable UUID teacherId) {
         return null;
     }
 }

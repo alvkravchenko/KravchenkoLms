@@ -9,6 +9,8 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 import java.util.UUID;
 
 @RestController
@@ -23,26 +25,29 @@ public class TeacherController {
 
     @GetMapping
     public PageResponseDTO<TeacherResponseDTO> getAll(Pageable pageable) {
-        return null;
+        return teacherService.findAll(pageable);
     } // пагинация
 
     @GetMapping("/{teacherId}")
     public TeacherResponseDTO getTeacherById(@PathVariable UUID teacherId) {
-        return null;
+        return teacherService.findById(teacherId);
     }
 
     @PostMapping
     public ResponseEntity<TeacherResponseDTO> createTeacher(@Valid @RequestBody TeacherCreateDTO createDTO) {
-        return null;
+        TeacherResponseDTO created = teacherService.create(createDTO);
+        URI location = URI.create("/api/teachers/" + created.getId());
+        return ResponseEntity.created(location).body(created);
     } // ResponseEntity для 201 + location
 
     @PutMapping("/{teacherId}")
     public TeacherResponseDTO updateTeacher(@PathVariable UUID teacherId, @Valid @RequestBody TeacherUpdateDTO updateDTO) {
-        return null;
+        return teacherService.update(teacherId, updateDTO);
     }
 
     @DeleteMapping("/{teacherId}")
     public ResponseEntity<Void> deleteTeacher(@PathVariable UUID teacherId) {
-        return null;
+        teacherService.delete(teacherId);
+        return ResponseEntity.noContent().build();
     }
 } // ResponseEntity для 204 no content
