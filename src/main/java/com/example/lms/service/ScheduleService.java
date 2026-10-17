@@ -1,16 +1,18 @@
 package com.example.lms.service;
 
+import com.example.lms.dto.PageResponseDTO;
 import com.example.lms.dto.schedule.ScheduleCreateDTO;
 import com.example.lms.dto.schedule.ScheduleResponseDTO;
 import com.example.lms.dto.schedule.ScheduleUpdateDTO;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.List;
+
 import java.util.UUID;
 
 @Service
 public class ScheduleService {
 
-    public List<ScheduleResponseDTO> findAll() {
+    public PageResponseDTO<ScheduleResponseDTO> findAll(Pageable pageable) {
         return null;
     }
 
@@ -28,13 +30,5 @@ public class ScheduleService {
 
     public void delete(UUID scheduleId) {
 
-    }
-
-    public List<ScheduleResponseDTO> getGroupSchedule(UUID groupId) {
-        return null;
-    }
-
-    public List<ScheduleResponseDTO> getTeacherSchedule(UUID teacherId) {
-        return null;
     }
 }

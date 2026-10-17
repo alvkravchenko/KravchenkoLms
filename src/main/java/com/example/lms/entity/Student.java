@@ -35,6 +35,7 @@ public class Student {
 
     @Column(name = "updated_at", nullable = false)
     @UpdateTimestamp
+
     private LocalDateTime updatedAt;
 
     @Column(name = "deleted", nullable = false)
