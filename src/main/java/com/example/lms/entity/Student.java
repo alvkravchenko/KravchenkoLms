@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
+@SQLRestriction("deleted = false")
 public class Student {
 
     @Id
@@ -44,10 +46,7 @@ public class Student {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
-    @ManyToMany(fetch = FetchType.LAZY) // ленивая по умолчанию, для явности
-    @JoinTable(name = "student_group",
-            joinColumns = @JoinColumn(name = "student_id"),//колонка владельца
-            inverseJoinColumns = @JoinColumn(name = "group_id")) // колонка другой стороны
+    @ManyToMany(mappedBy = "students", fetch = FetchType.LAZY) // ленивая по умолчанию, для явности
     private Set<Group> groups;
 }
 

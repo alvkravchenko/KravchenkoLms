@@ -21,3 +21,5 @@ databaseChangeLog:
       file: db/changelog/v1/10-add-audit-to-groups.yaml
   - include:
       file: db/changelog/v1/11-add-audit-to-schedules.yaml
+  - include:
+      file: db/changelog/v1/12-add-softdelete-to-courses-and-to-droups.yaml
