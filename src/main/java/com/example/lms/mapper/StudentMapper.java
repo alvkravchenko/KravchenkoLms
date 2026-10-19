@@ -25,6 +25,7 @@ public interface StudentMapper {
     @Mapping(target = "groups", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
     @Mapping(target = "deletedAt", ignore = true)
     void applyFrom (@MappingTarget Student student, StudentUpdateDTO updateDTO);
 }

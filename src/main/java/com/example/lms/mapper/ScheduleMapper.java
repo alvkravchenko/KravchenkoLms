@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = "spring", uses = {GroupMapper.class, TeacherMapper.class, CourseMapper.class})
+@Mapper(componentModel = "spring", uses = {GroupShortMapper.class, TeacherMapper.class, CourseMapper.class})
 public interface ScheduleMapper {
 
     ScheduleResponseDTO toResponseDTO(Schedule schedule);

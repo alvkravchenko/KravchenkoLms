@@ -18,9 +18,17 @@ public interface CourseMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "teacher", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
+    @Mapping(target = "deletedAt", ignore = true)
     Course toEntity(CourseCreateDTO createDTO);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "teacher", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "deleted", ignore = true)
+    @Mapping(target = "deletedAt", ignore = true)
     void applyFrom (@MappingTarget Course course, CourseUpdateDTO updateDTO);
 }
