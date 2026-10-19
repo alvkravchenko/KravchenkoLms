@@ -13,6 +13,7 @@ import com.example.lms.repository.TeacherRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -66,20 +67,29 @@ public class CourseService {
             throw new ConflictException("Курс с таким описанием уже существует");
         }
 
-        Teacher teacher = teacherRepository.findByIdOrThrow(updateDTO.getTeacherId());
         courseMapper.applyFrom(course, updateDTO);
-        course.setTeacher(teacher);
         Course saved = courseRepository.save(course);
         return courseMapper.toResponseDTO(saved);
     }
 
     public void delete(UUID courseId) {
-
         Course course = courseRepository.findByIdOrThrow(courseId);
-        courseRepository.delete(course);
+        course.setDeleted(true);
+        course.setDeletedAt(LocalDateTime.now());
+        courseRepository.save(course);
     }
 
     public CourseResponseDTO changeTeacher(UUID courseId, UUID teacherId) {
-        return null;
+
+        Course course = courseRepository.findByIdOrThrow(courseId);
+        Teacher teacher = teacherRepository.findByIdOrThrow(teacherId);
+
+        if (course.getTeacher().getId().equals(teacherId)) {
+            return courseMapper.toResponseDTO(course);  // ничего не меняем
+        }
+
+        course.setTeacher(teacher);
+        Course saved = courseRepository.save(course);
+        return courseMapper.toResponseDTO(saved);
     }
 }
