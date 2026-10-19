@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.UUID;
 
 @RestController
@@ -24,26 +25,29 @@ public class ScheduleController {
 
     @GetMapping
     public PageResponseDTO<ScheduleResponseDTO> getAll(Pageable pageable) {
-        return null;
+        return service.findAll(pageable);
     }
 
     @GetMapping("/{scheduleId}")
     public ScheduleResponseDTO getScheduleById(@PathVariable UUID scheduleId) {
-        return null;
+        return service.findById(scheduleId);
     }
 
     @PostMapping
     public ResponseEntity<ScheduleResponseDTO> createSchedule(@Valid @RequestBody ScheduleCreateDTO createDTO) {
-        return null;
+        ScheduleResponseDTO created = service.create(createDTO);
+        URI location = URI.create("/api/schedules/" + created.getId());
+        return ResponseEntity.created(location).body(created);
     }
 
     @PutMapping("/{scheduleId}")
     public ScheduleResponseDTO updateSchedule(@PathVariable UUID scheduleId, @Valid @RequestBody ScheduleUpdateDTO updateDTO) {
-        return null;
+        return service.update(scheduleId, updateDTO);
     }
 
     @DeleteMapping("/{scheduleId}")
     public ResponseEntity<Void> deleteSchedule(@PathVariable UUID scheduleId) {
-        return null;
+        service.delete(scheduleId);
+        return ResponseEntity.noContent().build();
     }
 }

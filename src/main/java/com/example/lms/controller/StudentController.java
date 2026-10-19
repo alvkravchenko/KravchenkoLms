@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.UUID;
 
 @RestController
@@ -24,27 +25,30 @@ public class StudentController {
 
     @GetMapping
     public PageResponseDTO<StudentResponseDTO> getAll(Pageable pageable) {
-        return null;
+        return studentService.findAll(pageable);
     }// пагинация
 
     @GetMapping("/{studentId}")
     public StudentResponseDTO getStudentById(@PathVariable UUID studentId) {
-        return null;
+        return studentService.findById(studentId);
     }
 
     @PostMapping
     public ResponseEntity<StudentResponseDTO> createStudent(@Valid @RequestBody StudentCreateDTO createDTO) {
-        return null;
+        StudentResponseDTO created = studentService.create(createDTO);
+        URI location = URI.create("/api/students/" + created.getId());
+        return ResponseEntity.created(location).body(created);
     } // ResponseEntity для 201 + location
 
     @PutMapping("/{studentId}")
     public StudentResponseDTO updateStudent(@PathVariable UUID studentId, @Valid @RequestBody StudentUpdateDTO updateDTO) {
-        return null;
+        return studentService.update(studentId, updateDTO);
     }
 
     @DeleteMapping("/{studentId}")
     public ResponseEntity<Void> deleteStudent(@PathVariable UUID studentId) {
-        return null;
+        studentService.delete(studentId);
+        return ResponseEntity.noContent().build();
     }
     // ResponseEntity для 204 no content
 }

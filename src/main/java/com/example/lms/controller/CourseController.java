@@ -53,6 +53,6 @@ public class CourseController {
 
     @PutMapping("/{courseId}/teacher/{teacherId}")
     public CourseResponseDTO changeTeacher (@PathVariable UUID courseId, @PathVariable UUID teacherId){
-        return null;
+        return courseService.changeTeacher(courseId, teacherId);
     }
 }
