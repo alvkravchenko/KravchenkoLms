@@ -4,6 +4,7 @@ import com.example.lms.entity.Group;
 import com.example.lms.exception.GroupNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface GroupRepository extends JpaRepository<Group, UUID> {
@@ -11,4 +12,6 @@ public interface GroupRepository extends JpaRepository<Group, UUID> {
     default Group findByIdOrThrow(UUID id) {
         return findById(id).orElseThrow(() -> new GroupNotFoundException("Группа с id " + id + " не найдена"));
     }
+
+    Optional<Group> findByName(String name);
 }

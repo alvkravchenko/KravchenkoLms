@@ -13,7 +13,7 @@ import com.example.lms.repository.StudentRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,16 +47,24 @@ public class StudentService {
             throw new GroupNotFoundException("Не все переданные группы найдены");
         }
         Student student = studentMapper.toEntity(createDTO);
-        student.setGroups(new HashSet<>(groupList));
         Student saved = studentRepository.save(student);
+        for (Group group : groupList) {
+            group.getStudents().add(saved);
+        }
         return studentMapper.toResponseDTO(saved);
     }
 
     public StudentResponseDTO update(UUID studentId, StudentUpdateDTO updateDTO) {
         Student student = studentRepository.findByIdOrThrow(studentId);
         studentMapper.applyFrom(student, updateDTO);
+        Student saved = studentRepository.save(student);
+        return studentMapper.toResponseDTO(saved);
     }
 
     public void delete(UUID studentId) {
+        Student student = studentRepository.findByIdOrThrow(studentId);
+        student.setDeleted(true);
+        student.setDeletedAt(LocalDateTime.now());
+        studentRepository.save(student);
     }
 }
