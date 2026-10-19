@@ -14,12 +14,14 @@ import com.example.lms.repository.GroupRepository;
 import com.example.lms.repository.StudentRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class GroupService {
 
     private final GroupRepository groupRepository;
@@ -32,15 +34,18 @@ public class GroupService {
         this.studentRepository = studentRepository;
     }
 
+    @Transactional(readOnly = true)
     public PageResponseDTO<GroupResponseDTO> findAll(Pageable pageable) {
         return PageResponseDTO.from(groupRepository.findAll(pageable).map(groupMapper::toResponseDTO));
     }
 
+    @Transactional(readOnly = true)
     public GroupResponseDTO findById(UUID groupId) {
         Group group = groupRepository.findByIdOrThrow(groupId);
         return groupMapper.toResponseDTO(group);
     }
 
+    @Transactional
     public GroupResponseDTO create(GroupCreateDTO createDTO) {
         if (groupRepository.findByName(createDTO.getName()).isPresent()) {
             throw new ConflictException("Группа с таким названием уже существует");
@@ -51,6 +56,7 @@ public class GroupService {
         return groupMapper.toResponseDTO(saved);
     }
 
+    @Transactional
     public GroupResponseDTO update(UUID groupId, GroupUpdateDTO updateDTO) {
         Group group = groupRepository.findByIdOrThrow(groupId);
 
@@ -65,6 +71,7 @@ public class GroupService {
         return groupMapper.toResponseDTO(saved);
     }
 
+    @Transactional
     public void delete(UUID groupId) {
         Group group = groupRepository.findByIdOrThrow(groupId);
         group.setDeleted(true);
@@ -72,6 +79,7 @@ public class GroupService {
         groupRepository.save(group);
     }
 
+    @Transactional
     public GroupResponseDTO addStudentsToGroup(UUID groupId, StudentsToGroupDTO dto) {
         Group group = groupRepository.findByIdOrThrow(groupId);
         List<Student> students = studentRepository.findAllById(dto.getStudentIds());
@@ -82,6 +90,7 @@ public class GroupService {
         return groupMapper.toResponseDTO(group);
     }
 
+    @Transactional
     public GroupResponseDTO removeStudentsFromGroup(UUID groupId, StudentsToGroupDTO dto) {
         Group group = groupRepository.findByIdOrThrow(groupId);
         group.getStudents().removeIf(s -> dto.getStudentIds().contains(s.getId()));

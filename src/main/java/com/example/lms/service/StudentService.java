@@ -12,12 +12,14 @@ import com.example.lms.repository.GroupRepository;
 import com.example.lms.repository.StudentRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class StudentService {
 
     private final StudentMapper studentMapper;
@@ -30,10 +32,12 @@ public class StudentService {
         this.groupRepository = groupRepository;
     }
 
+    @Transactional(readOnly = true)
     public PageResponseDTO<StudentResponseDTO> findAll(Pageable pageable) {
         return PageResponseDTO.from(studentRepository.findAll(pageable).map(studentMapper::toResponseDTO));
     }
 
+    @Transactional(readOnly = true)
     public StudentResponseDTO findById(UUID studentId) {
 
         Student student = studentRepository.findByIdOrThrow(studentId);
@@ -41,6 +45,7 @@ public class StudentService {
 
     }
 
+    @Transactional
     public StudentResponseDTO create(StudentCreateDTO createDTO) {
         List<Group> groupList = groupRepository.findAllById(createDTO.getGroupIds());
         if (groupList.size() != createDTO.getGroupIds().size()) {
@@ -54,6 +59,7 @@ public class StudentService {
         return studentMapper.toResponseDTO(saved);
     }
 
+    @Transactional
     public StudentResponseDTO update(UUID studentId, StudentUpdateDTO updateDTO) {
         Student student = studentRepository.findByIdOrThrow(studentId);
         studentMapper.applyFrom(student, updateDTO);
@@ -61,6 +67,7 @@ public class StudentService {
         return studentMapper.toResponseDTO(saved);
     }
 
+    @Transactional
     public void delete(UUID studentId) {
         Student student = studentRepository.findByIdOrThrow(studentId);
         student.setDeleted(true);

@@ -13,10 +13,12 @@ import com.example.lms.repository.GroupRepository;
 import com.example.lms.repository.ScheduleRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
 @Service
+@Transactional
 public class ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
@@ -34,15 +36,18 @@ public class ScheduleService {
         this.courseRepository = courseRepository;
     }
 
+    @Transactional(readOnly = true)
     public PageResponseDTO<ScheduleResponseDTO> findAll(Pageable pageable) {
         return PageResponseDTO.from(scheduleRepository.findAll(pageable).map(scheduleMapper::toResponseDTO));
     }
 
+    @Transactional(readOnly = true)
     public ScheduleResponseDTO findById(UUID scheduleId) {
         Schedule schedule = scheduleRepository.findByIdOrThrow(scheduleId);
         return scheduleMapper.toResponseDTO(schedule);
     }
 
+    @Transactional
     public ScheduleResponseDTO create(ScheduleCreateDTO createDTO) {
         Group group = groupRepository.findByIdOrThrow(createDTO.getGroupId());
         Course course = courseRepository.findByIdOrThrow(createDTO.getCourseId());
@@ -56,6 +61,7 @@ public class ScheduleService {
         return scheduleMapper.toResponseDTO(saved);
     }
 
+    @Transactional
     public ScheduleResponseDTO update(UUID scheduleId, ScheduleUpdateDTO updateDTO) {
         Schedule schedule = scheduleRepository.findByIdOrThrow(scheduleId);
 
@@ -71,6 +77,7 @@ public class ScheduleService {
         return scheduleMapper.toResponseDTO(saved);
     }
 
+    @Transactional
     public void delete(UUID scheduleId) {
         Schedule schedule = scheduleRepository.findByIdOrThrow(scheduleId);
         scheduleRepository.delete(schedule);

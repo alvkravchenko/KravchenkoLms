@@ -12,11 +12,13 @@ import com.example.lms.repository.CourseRepository;
 import com.example.lms.repository.TeacherRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class CourseService {
 
     private final CourseRepository courseRepository;
@@ -29,15 +31,18 @@ public class CourseService {
         this.teacherRepository = teacherRepository;
     }
 
+    @Transactional(readOnly = true)
     public PageResponseDTO<CourseResponseDTO> findAll(Pageable pageable) {
         return PageResponseDTO.from(courseRepository.findAll(pageable).map(courseMapper::toResponseDTO));
     }
 
+    @Transactional(readOnly = true)
     public CourseResponseDTO findById(UUID courseId) {
         Course course = courseRepository.findByIdOrThrow(courseId);
         return courseMapper.toResponseDTO(course);
     }
 
+    @Transactional
     public CourseResponseDTO create(CourseCreateDTO createDTO) {
         if (courseRepository.findByName(createDTO.getName()).isPresent()) {
             throw new ConflictException("Курс с таким названием уже существует");
@@ -52,6 +57,7 @@ public class CourseService {
         return courseMapper.toResponseDTO(saved);
     }
 
+    @Transactional
     public CourseResponseDTO update(UUID courseId, CourseUpdateDTO updateDTO) {
 
         Course course = courseRepository.findByIdOrThrow(courseId);
@@ -72,6 +78,7 @@ public class CourseService {
         return courseMapper.toResponseDTO(saved);
     }
 
+    @Transactional
     public void delete(UUID courseId) {
         Course course = courseRepository.findByIdOrThrow(courseId);
         course.setDeleted(true);
@@ -79,6 +86,7 @@ public class CourseService {
         courseRepository.save(course);
     }
 
+    @Transactional
     public CourseResponseDTO changeTeacher(UUID courseId, UUID teacherId) {
 
         Course course = courseRepository.findByIdOrThrow(courseId);
