@@ -1,6 +1,7 @@
 package com.example.lms.controller;
 
 import com.example.lms.dto.PageResponseDTO;
+import com.example.lms.dto.filter.ScheduleFilterDTO;
 import com.example.lms.dto.schedule.ScheduleCreateDTO;
 import com.example.lms.dto.schedule.ScheduleResponseDTO;
 import com.example.lms.dto.schedule.ScheduleUpdateDTO;
@@ -24,8 +25,8 @@ public class ScheduleController {
     }
 
     @GetMapping
-    public PageResponseDTO<ScheduleResponseDTO> getAll(Pageable pageable) {
-        return service.findAll(pageable);
+    public PageResponseDTO<ScheduleResponseDTO> getAll(Pageable pageable, ScheduleFilterDTO filterDTO) {
+        return service.findAll(pageable, filterDTO);
     }
 
     @GetMapping("/{scheduleId}")

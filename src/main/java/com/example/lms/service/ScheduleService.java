@@ -1,6 +1,7 @@
 package com.example.lms.service;
 
 import com.example.lms.dto.PageResponseDTO;
+import com.example.lms.dto.filter.ScheduleFilterDTO;
 import com.example.lms.dto.schedule.ScheduleCreateDTO;
 import com.example.lms.dto.schedule.ScheduleResponseDTO;
 import com.example.lms.dto.schedule.ScheduleUpdateDTO;
@@ -11,7 +12,9 @@ import com.example.lms.mapper.ScheduleMapper;
 import com.example.lms.repository.CourseRepository;
 import com.example.lms.repository.GroupRepository;
 import com.example.lms.repository.ScheduleRepository;
+import com.example.lms.specification.ScheduleSpecification;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,8 +40,9 @@ public class ScheduleService {
     }
 
     @Transactional(readOnly = true)
-    public PageResponseDTO<ScheduleResponseDTO> findAll(Pageable pageable) {
-        return PageResponseDTO.from(scheduleRepository.findAll(pageable).map(scheduleMapper::toResponseDTO));
+    public PageResponseDTO<ScheduleResponseDTO> findAll(Pageable pageable, ScheduleFilterDTO filterDTO) {
+        Specification<Schedule> spec = ScheduleSpecification.byFilter(filterDTO);
+        return PageResponseDTO.from(scheduleRepository.findAll(spec, pageable).map(scheduleMapper::toResponseDTO));
     }
 
     @Transactional(readOnly = true)
