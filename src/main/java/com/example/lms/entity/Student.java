@@ -9,6 +9,7 @@ import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -47,6 +48,5 @@ public class Student {
     private LocalDateTime deletedAt;
 
     @ManyToMany(mappedBy = "students", fetch = FetchType.LAZY) // ленивая по умолчанию, для явности
-    private Set<Group> groups;
+    private Set<Group> groups = new HashSet<>();
 }
-

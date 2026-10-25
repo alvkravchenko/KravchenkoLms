@@ -55,6 +55,7 @@ public class StudentService {
         Student saved = studentRepository.save(student);
         for (Group group : groupList) {
             group.getStudents().add(saved);
+            saved.getGroups().add(group);
         }
         return studentMapper.toResponseDTO(saved);
     }
