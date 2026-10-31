@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-public class CourseShortDTO {// для встраивания в ScheduleResponseDTO
+public class CourseShortDTO {
 
     private UUID id;
     private String name;

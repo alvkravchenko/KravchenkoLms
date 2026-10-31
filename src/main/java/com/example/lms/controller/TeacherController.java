@@ -26,7 +26,7 @@ public class TeacherController {
     @GetMapping
     public PageResponseDTO<TeacherResponseDTO> getAll(Pageable pageable) {
         return teacherService.findAll(pageable);
-    } // пагинация
+    }
 
     @GetMapping("/{teacherId}")
     public TeacherResponseDTO getTeacherById(@PathVariable UUID teacherId) {
@@ -38,7 +38,7 @@ public class TeacherController {
         TeacherResponseDTO created = teacherService.create(createDTO);
         URI location = URI.create("/api/teachers/" + created.getId());
         return ResponseEntity.created(location).body(created);
-    } // ResponseEntity для 201 + location
+    }
 
     @PutMapping("/{teacherId}")
     public TeacherResponseDTO updateTeacher(@PathVariable UUID teacherId, @Valid @RequestBody TeacherUpdateDTO updateDTO) {
@@ -50,4 +50,4 @@ public class TeacherController {
         teacherService.delete(teacherId);
         return ResponseEntity.noContent().build();
     }
-} // ResponseEntity для 204 no content
+}

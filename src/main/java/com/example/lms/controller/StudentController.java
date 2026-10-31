@@ -26,7 +26,7 @@ public class StudentController {
     @GetMapping
     public PageResponseDTO<StudentResponseDTO> getAll(Pageable pageable) {
         return studentService.findAll(pageable);
-    }// пагинация
+    }
 
     @GetMapping("/{studentId}")
     public StudentResponseDTO getStudentById(@PathVariable UUID studentId) {
@@ -38,7 +38,7 @@ public class StudentController {
         StudentResponseDTO created = studentService.create(createDTO);
         URI location = URI.create("/api/students/" + created.getId());
         return ResponseEntity.created(location).body(created);
-    } // ResponseEntity для 201 + location
+    }
 
     @PutMapping("/{studentId}")
     public StudentResponseDTO updateStudent(@PathVariable UUID studentId, @Valid @RequestBody StudentUpdateDTO updateDTO) {
@@ -50,5 +50,5 @@ public class StudentController {
         studentService.delete(studentId);
         return ResponseEntity.noContent().build();
     }
-    // ResponseEntity для 204 no content
+
 }

@@ -58,5 +58,5 @@ public class TeacherService {
         teacher.setDeleted(true);
         teacher.setDeletedAt(LocalDateTime.now());
         teacherRepository.save(teacher);
-    }
+    } 
 }

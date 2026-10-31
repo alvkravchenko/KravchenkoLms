@@ -26,7 +26,7 @@ public class CourseController {
     @GetMapping
     public PageResponseDTO<CourseResponseDTO> getAll(Pageable pageable) {
         return courseService.findAll(pageable);
-    } // пагинация
+    }
 
     @GetMapping("/{courseId}")
     public CourseResponseDTO getCourseById(@PathVariable UUID courseId) {
@@ -38,7 +38,7 @@ public class CourseController {
         CourseResponseDTO created = courseService.create(createDTO);
         URI location = URI.create("/api/courses/" + created.getId());
         return ResponseEntity.created(location).body(created);
-    } // ResponseEntity для 201 + location
+    }
 
     @PutMapping("/{courseId}")
     public CourseResponseDTO updateCourse(@PathVariable UUID courseId, @Valid @RequestBody CourseUpdateDTO updateDTO) {
@@ -49,10 +49,10 @@ public class CourseController {
     public ResponseEntity<Void> deleteCourse(@PathVariable UUID courseId) {
         courseService.delete(courseId);
         return ResponseEntity.noContent().build();
-    }// ResponseEntity для 204 no content
+    }
 
     @PutMapping("/{courseId}/teacher/{teacherId}")
-    public CourseResponseDTO changeTeacher (@PathVariable UUID courseId, @PathVariable UUID teacherId){
+    public CourseResponseDTO changeTeacher(@PathVariable UUID courseId, @PathVariable UUID teacherId) {
         return courseService.changeTeacher(courseId, teacherId);
     }
 }

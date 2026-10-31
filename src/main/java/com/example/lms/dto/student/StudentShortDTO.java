@@ -6,7 +6,7 @@ import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-public class StudentShortDTO { // для встраивания в GroupResponseDTO
+public class StudentShortDTO {
 
     private UUID id;
     private String firstName;

@@ -1,120 +1,105 @@
 package com.example.lms.controller;
 
+import com.example.lms.BaseIntegrationTest;
 import com.example.lms.dto.teacher.TeacherCreateDTO;
-import com.example.lms.dto.teacher.TeacherResponseDTO;
 import com.example.lms.repository.TeacherRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.boot.resttestclient.TestRestTemplate;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
-@AutoConfigureTestRestTemplate
-class TeacherControllerIntegrationTest {
-
-    @LocalServerPort
-    private int port;
+class TeacherControllerIntegrationTest extends BaseIntegrationTest {
 
     @Autowired
-    private TestRestTemplate restTemplate;
+    private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Autowired
     private TeacherRepository teacherRepository;
-
-    private String baseUrl() {
-        return "http://localhost:" + port + "/api/teachers";
-    }
 
     @BeforeEach
     void setUp() {
         teacherRepository.deleteAll();
     }
 
-    @AfterEach
-    void tearDown() {
-        teacherRepository.deleteAll();
-    }
-
     @Test
-    void createTeacher_returns201() {
+    void createTeacher_returns201() throws Exception {
         TeacherCreateDTO dto = new TeacherCreateDTO();
         dto.setFirstName("Иван");
         dto.setLastName("Иванов");
 
-        ResponseEntity<TeacherResponseDTO> response =
-                restTemplate.postForEntity(baseUrl(), dto, TeacherResponseDTO.class);
-
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-        assertThat(response.getBody()).isNotNull();
-        assertThat(response.getBody().getId()).isNotNull();
-        assertThat(response.getBody().getFirstName()).isEqualTo("Иван");
-        assertThat(response.getBody().getLastName()).isEqualTo("Иванов");
+        mockMvc.perform(post("/api/teachers")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.firstName").value("Иван"))
+                .andExpect(jsonPath("$.lastName").value("Иванов"));
     }
 
     @Test
-    void getTeacherById_returns200() {
+    void getTeacherById_returns200() throws Exception {
         TeacherCreateDTO dto = new TeacherCreateDTO();
         dto.setFirstName("Пётр");
         dto.setLastName("Петров");
 
-        ResponseEntity<TeacherResponseDTO> created =
-                restTemplate.postForEntity(baseUrl(), dto, TeacherResponseDTO.class);
-        UUID id = created.getBody().getId();
+        String responseJson = mockMvc.perform(post("/api/teachers")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andReturn().getResponse().getContentAsString();
+        String id = objectMapper.readTree(responseJson).get("id").asText();
 
-        ResponseEntity<TeacherResponseDTO> response =
-                restTemplate.getForEntity(baseUrl() + "/" + id, TeacherResponseDTO.class);
-
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody().getFirstName()).isEqualTo("Пётр");
+        mockMvc.perform(get("/api/teachers/{id}", id))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.firstName").value("Пётр"));
     }
 
     @Test
-    void getTeacherById_notFound_returns404() {
-        ResponseEntity<String> response =
-                restTemplate.getForEntity(baseUrl() + "/" + UUID.randomUUID(), String.class);
+    void getTeacherById_notFound_returns404() throws Exception {
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        mockMvc.perform(get("/api/teachers/{id}", UUID.randomUUID()))
+                .andExpect(status().isNotFound());
     }
 
     @Test
-    void createTeacher_emptyFirstName_returns400() {
+    void createTeacher_emptyFirstName_returns400() throws Exception {
         TeacherCreateDTO dto = new TeacherCreateDTO();
         dto.setFirstName("");
         dto.setLastName("Иванов");
 
-        ResponseEntity<String> response =
-                restTemplate.postForEntity(baseUrl(), dto, String.class);
-
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+        mockMvc.perform(post("/api/teachers")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().isBadRequest());
     }
 
     @Test
-    void deleteTeacher_returns204_andNotFoundAfter() {
+    void deleteTeacher_returns204_andNotFoundAfter() throws Exception {
         TeacherCreateDTO dto = new TeacherCreateDTO();
         dto.setFirstName("Сидор");
         dto.setLastName("Сидоров");
 
-        ResponseEntity<TeacherResponseDTO> created =
-                restTemplate.postForEntity(baseUrl(), dto, TeacherResponseDTO.class);
-        UUID id = created.getBody().getId();
+        String responseJson = mockMvc.perform(post("/api/teachers")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andReturn().getResponse().getContentAsString();
 
-        restTemplate.delete(baseUrl() + "/" + id);
+        String id = objectMapper.readTree(responseJson).get("id").asText();
 
-        ResponseEntity<String> response =
-                restTemplate.getForEntity(baseUrl() + "/" + id, String.class);
+        mockMvc.perform(delete("/api/teachers/{id}", id))
+                .andExpect(status().isNoContent());
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        mockMvc.perform(get("/api/teachers/{id}", id))
+                .andExpect(status().isNotFound());
     }
 }

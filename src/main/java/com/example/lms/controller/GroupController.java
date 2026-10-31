@@ -39,7 +39,7 @@ public class GroupController {
         GroupResponseDTO created = service.create(createDTO);
         URI location = URI.create("/api/groups/" + created.getId());
         return ResponseEntity.created(location).body(created);
-    }// ResponseEntity для 201 + location
+    }
 
     @PutMapping("/{groupId}")
     public GroupResponseDTO updateGroup(@PathVariable UUID groupId, @Valid @RequestBody GroupUpdateDTO updateDTO) {
@@ -50,7 +50,7 @@ public class GroupController {
     public ResponseEntity<Void> deleteGroup(@PathVariable UUID groupId) {
         service.delete(groupId);
         return ResponseEntity.noContent().build();
-    } // ResponseEntity для 204 no content
+    }
 
     @PostMapping("/{groupId}/students") // эндпоинт для добавления связи
     public ResponseEntity<GroupResponseDTO> addStudentsToGroup(@PathVariable UUID groupId, @Valid @RequestBody StudentsToGroupDTO dto) {

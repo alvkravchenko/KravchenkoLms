@@ -47,6 +47,6 @@ public class Student {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
-    @ManyToMany(mappedBy = "students", fetch = FetchType.LAZY) // ленивая по умолчанию, для явности
+    @ManyToMany(mappedBy = "students", fetch = FetchType.LAZY)
     private Set<Group> groups = new HashSet<>();
 }

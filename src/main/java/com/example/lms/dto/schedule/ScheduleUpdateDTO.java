@@ -10,7 +10,6 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 public class ScheduleUpdateDTO {
-    // передумал, будет PUT , однотипно с остальными, либо все менять на PATH, но не хочу сейчас
 
     @NotNull(message = "Расписание не может быть обновлено без группы")
     private UUID groupId;
