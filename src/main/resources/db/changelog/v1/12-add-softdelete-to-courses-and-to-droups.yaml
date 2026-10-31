@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 12
+      author: alexandr_kravchenko
+      changes:
+        - addColumn:
+            tableName: courses
+            columns:
+              - column:
+                  name: deleted
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deleted_at
+                  type: TIMESTAMP
+        - addColumn:
+            tableName: groups
+            columns:
+              - column:
+                  name: deleted
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deleted_at
+                  type: TIMESTAMP
+
+

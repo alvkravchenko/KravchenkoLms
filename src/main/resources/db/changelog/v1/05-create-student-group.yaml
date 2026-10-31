@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 5
+      author: alexandr_kravchenko
+      changes:
+        - createTable:
+            tableName: student_group
+            columns:
+              - column:
+                  name: student_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_students_groups_student
+                    references: students(id)
+              - column:
+                  name: group_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_students_groups_group
+                    references: groups(id)
+            primaryKey:
+              name: pk_student_group
+              columns:
+                - column:
+                    name: student_id
+                - column:
+                    name: group_id

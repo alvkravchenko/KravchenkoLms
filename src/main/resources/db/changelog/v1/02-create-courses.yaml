@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: alexandr_kravchenko
+      changes:
+        - createTable:
+            tableName: courses
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(1000)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: teacher_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_courses_teachers
+                    references: teachers(id)
