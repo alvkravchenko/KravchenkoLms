@@ -5,6 +5,7 @@ import com.example.lms.exception.ScheduleNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public interface ScheduleRepository extends JpaRepository<Schedule, UUID>,
@@ -13,4 +14,5 @@ public interface ScheduleRepository extends JpaRepository<Schedule, UUID>,
     default Schedule findByIdOrThrow(UUID id) {
         return findById(id).orElseThrow(() -> new ScheduleNotFoundException("Расписание с id " + id + " не найдено"));
     }
+    int deleteByEndDateBefore(LocalDate date);
 }
