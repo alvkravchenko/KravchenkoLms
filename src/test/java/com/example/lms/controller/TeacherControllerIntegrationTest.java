@@ -3,7 +3,7 @@ package com.example.lms.controller;
 import com.example.lms.BaseIntegrationTest;
 import com.example.lms.dto.teacher.TeacherCreateDTO;
 import com.example.lms.repository.TeacherRepository;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -24,8 +24,8 @@ class TeacherControllerIntegrationTest extends BaseIntegrationTest {
     @Autowired
     private TeacherRepository teacherRepository;
 
-    @BeforeEach
-    void setUp() {
+    @AfterEach
+    void tearDown() {
         teacherRepository.deleteAll();
     }
 
