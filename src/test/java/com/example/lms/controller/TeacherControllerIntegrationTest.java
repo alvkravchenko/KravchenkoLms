@@ -2,13 +2,11 @@ package com.example.lms.controller;
 
 import com.example.lms.BaseIntegrationTest;
 import com.example.lms.dto.teacher.TeacherCreateDTO;
-import com.example.lms.repository.TeacherRepository;
-import org.junit.jupiter.api.AfterEach;
+import com.example.lms.dto.teacher.TeacherUpdateDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -21,13 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class TeacherControllerIntegrationTest extends BaseIntegrationTest {
 
-    @Autowired
-    private TeacherRepository teacherRepository;
-
-    @AfterEach
-    void tearDown() {
-        teacherRepository.deleteAll();
-    }
 
     @Test
     void createTeacher_returns201() throws Exception {
@@ -76,6 +67,7 @@ class TeacherControllerIntegrationTest extends BaseIntegrationTest {
 
     static Stream<Arguments> badRequestTeacher() {
         return Stream.of(
+
                 Arguments.of(null, "Иванов"),
                 Arguments.of("", "Иванов"),
                 Arguments.of(" ", "Иванов"),
@@ -85,6 +77,21 @@ class TeacherControllerIntegrationTest extends BaseIntegrationTest {
                 Arguments.of("Иван", " "),
                 Arguments.of("Иван", "а".repeat(51))
         );
+    }
+
+    @Test
+    @Sql("classpath:sql/teachers.sql")
+    void updateTeacher_returns200() throws Exception {
+        TeacherUpdateDTO dto = new TeacherUpdateDTO();
+        dto.setFirstName("Пётр");
+        dto.setLastName("Первый");
+
+        mockMvc.perform(put("/api/teachers/{id}", "a7eabc45-3794-47ab-a5c1-2f91268eb503")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.firstName").value("Пётр"))
+                .andExpect(jsonPath("$.lastName").value("Первый"));
     }
 
     @Test
