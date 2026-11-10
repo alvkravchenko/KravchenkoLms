@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: 7
+      author: alexandr_kravchenko
+      changes:
+        - addColumn:
+            tableName: teachers
+            columns:
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deleted
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deleted_at
+                  type: TIMESTAMP

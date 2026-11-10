@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: 6
+      author: alexandr_kravchenko
+      changes:
+        - createTable:
+            tableName: schedules
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: group_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_schedules_groups
+                    references: groups(id)
+              - column:
+                  name: teacher_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_schedules_teachers
+                    references: teachers(id)
+              - column:
+                  name: course_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_schedules_courses
+                    references: courses(id)
+              - column:
+                  name: start_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_date
+                  type: DATE
+                  constraints:
+                    nullable: false
